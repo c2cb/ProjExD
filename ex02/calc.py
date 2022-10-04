@@ -1,4 +1,4 @@
-
+# print("aaa") 使わないコードは消す（見えていない予定）
 
 
 import tkinter as tk
