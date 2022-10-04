@@ -1,4 +1,4 @@
-print("aaa")
+
 
 
 import tkinter as tk
@@ -36,11 +36,12 @@ entry = tk.Entry(root, width=10, font=("", 40), justify="right")
 entry.grid(row=0, column=0, columnspan=3)
 
 
-r = 1
-c = 0
+r = 1 # row
+c = 0 # column
 
 numbers = list(range(9, -1, -1))
 operators = ["+"]
+# 四則演算を追加する！！！！！
 
 for i, num in enumerate(numbers+operators, 1):
     btn = tk.Button(root,
