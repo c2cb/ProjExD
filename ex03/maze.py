@@ -17,6 +17,10 @@ def key_up(event):
 
 
 # 練習7
+# #9のコメントから、先生のリポジトリを参考に直そうと思いましたが、写真のアドレスをいれるために、
+# if文にしており、今回は見送られて頂く形をとりました。
+# 代わりにといってはなんですが、壁の色をより鮮やかにさせて頂きましたので、
+# お楽しみください。
 def main_proc():
     global mx, my
     global cx, cy
@@ -36,14 +40,24 @@ def main_proc():
 
     if maze_lst[my][mx] == 0: # 床なら
         cx, cy = mx*100+50, my*100+50
+        # 壁の色をカラフルにした
         for i in mm.d:
-            iro = randint(0, 2)
+            iro = randint(0, 6)
             if (iro==0) :
                 canv.itemconfig(i, fill="red")
             elif (iro==1) :
                 canv.itemconfig(i, fill="yellow")
             elif (iro==2) :
                 canv.itemconfig(i, fill="Green")
+            elif (iro==3) :
+                canv.itemconfig(i, fill="HotPink")
+            elif (iro==4) :
+                canv.itemconfig(i, fill="Gold")
+            elif (iro==5) :
+                canv.itemconfig(i, fill="DeepSkyBlue")
+            elif (iro==6) :
+                canv.itemconfig(i, fill="Orchid")
+
             
     else: # 壁なら
         if key == "Up":
