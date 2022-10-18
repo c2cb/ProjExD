@@ -22,6 +22,7 @@ def main_proc():
     global cx, cy
     if key == "Up":
         my -= 1
+        #記録した写真のアドレスをここに入れることで、移動の際のこうかとんに動きを付けることができる
         canv.itemconfig(ugo5, image=ugo1)
     if key == "Down":
         my += 1
@@ -77,6 +78,7 @@ if __name__ == "__main__":
     # 練習3
     tori = tk.PhotoImage(file="ex03/fig/0.png")
 
+    # 写真のアドレスを記録する
     ugo1 = tk.PhotoImage(file="ex03/fig/6.png")
     ugo2 = tk.PhotoImage(file="ex03/fig/3.png")
     ugo3 = tk.PhotoImage(file="ex03/fig/5.png")

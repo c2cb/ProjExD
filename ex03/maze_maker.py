@@ -27,12 +27,13 @@ def make_maze(yoko, tate):
             else:     rnd = random.randint(0, 3)
             maze_lst[y+YP[rnd]][x+XP[rnd]] = 1
     
+    # ゴール
     maze_lst[7][13] = 2
 
     return maze_lst
 
 def show_maze(canvas, maze_lst):
-    color = ["white", "gray", "MidnightBlue"]
+    color = ["white", "gray", "MidnightBlue"]#3番目はゴールの色である
     global d
 
     for y in range(len(maze_lst)):
@@ -45,6 +46,8 @@ def show_maze(canvas, maze_lst):
                                     fill=color[maze_lst[y][x]])
     canvas.create_rectangle(100, 100, 200, 200, fill="GreenYellow")
     canvas.create_rectangle(100, 100, 200, 200, fill="GreenYellow")
+
+    # 経験
     # canvas.create_rectangle(950, 950, 950, 950, fill="GreenYellow")
     # canvas.create_rectangle(950, 950, 950, 950, fill="GreenYellow")
     
