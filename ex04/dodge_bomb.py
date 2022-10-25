@@ -1,9 +1,12 @@
 import pygame as pg
 import sys
 from random import randint
+
+
+
+
+# 追加機能で、tkを使用していたら、という方針のコードです。ここから、
 # import tkinter as tk
-
-
 # def botanhantei(event) :
 #     btn1 = event.widget
 #     txt = btn1["text"]
@@ -33,6 +36,7 @@ from random import randint
 #         return 1
 #     if (button2):
 #         return 0'''
+# ここまで
     
 
 
@@ -56,15 +60,15 @@ def main():
     pg.display.set_caption("逃げろ！こうかとん")
     scrn_sfc = pg.display.set_mode((1600, 900))
     scrn_rct = scrn_sfc.get_rect()
+
+    # コメント12から、modeについて詳しく説明を付けました。
     while True:
         if mode == 0:
+            # modeは、ゲームが終了か継続かを判断する際に使われる。
+            # 0の場合はゲームは再開となり、0の場合では終了となる。
             bg_sfc = pg.image.load("fig/pg_bg.jpg")
             bg_rct = bg_sfc.get_rect()
-            # pg.display.set_caption("逃げろ！こうかとん")
-            # scrn_sfc = pg.display.set_mode((1600, 600))
-            # scrn_rfc = bg_sfc.get_rect()
-            # bg_sfc = pg.image.load("fig/pg_bg.jpg")
-            # tori_rct = tori_sfc.get_rect()
+    
 
             # 練習3
             tori_sfc = pg.image.load("fig/6.png")
@@ -94,7 +98,6 @@ def main():
                 for event in pg.event.get(): # 練習2
                     if event.type == pg.QUIT:
                         return
-
 
                 
                 key_states = pg.key.get_pressed()
@@ -182,10 +185,10 @@ def main():
                         return
 
                 key_states = pg.key.get_pressed()
-                if key_states[pg.K_UP]: # こうかとんの縦座標を+1
+                if key_states[pg.K_UP]: # UPを押した際、modeは0となり、ゲームは再開される
                     mode=0
                     break
-                if key_states[pg.K_DOWN]: # こうかとんの縦座標を-1
+                if key_states[pg.K_DOWN]: # DOWNを押した際、tori_rct.colliderectへreturnされ、modeは1となり、ゲームは終了する。
                     return
 
                 scrn_sfc.blit(bg_sfc, bg_rct)
