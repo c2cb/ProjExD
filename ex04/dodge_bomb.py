@@ -98,6 +98,19 @@ def main():
 
                 
                 key_states = pg.key.get_pressed()
+
+                # コメント11から、先生のリポジトリを参考に簡潔にまとめてみました。
+                # key_delta = {
+                #     pg.K_UP:    [0, -1],
+                #     pg.K_DOWN:  [0, +1],
+                #     pg.K_LEFT:  [-1, 0],
+                #     pg.K_RIGHT: [+1, 0],
+                # }
+
+                # しかし、こうかとんが移動方法によって動きを変えたいため、
+                # ここでは元の文で行かせていただきます。
+
+                # 元の文はここから、
                 if key_states[pg.K_UP]: # こうかとんの縦座標を+1
                     tori_rct.centery -= 1
                     tori_sfc = pg.image.load("fig/6.png")
@@ -117,6 +130,7 @@ def main():
                     tori_rct.centerx += 1
                     tori_sfc = pg.image.load("fig/2.png")
                     tori_sfc = pg.transform.rotozoom(tori_sfc, 0, 2.0)
+                # ここまで
                 
 
                 yoko, tate = check_bound(tori_rct, scrn_rct)
