@@ -2,6 +2,14 @@ import pygame as pg
 import sys
 from random import randint
 
+# コメント14を受けての修正
+# プロジェクト演習テーマD 第5回授業資料、P13
+# 一貫性にこだわりすぎるのは、狭い心の表れである
+# より見やすさのために、臨機応変さも必要であるため、ここでは関数と関数の区切りに
+# 使用した改行は3
+# 中身の処理の区切りに使用した改行は2、状況を見て1
+# 以上の通り修正した。
+
 
 class Screen:
     def __init__(self, title, wh, bgimg):
@@ -11,8 +19,10 @@ class Screen:
         self.bgi_sfc = pg.image.load(bgimg) #"fig/pg_bg.jpg"
         self.bgi_rct = self.bgi_sfc.get_rect()
         
+
     def blit(self):
         self.sfc.blit(self.bgi_sfc, self.bgi_rct)
+
 
 
 class Bird:
@@ -23,6 +33,7 @@ class Bird:
         pg.K_RIGHT: [+1, 0],
     }
 
+
     def __init__(self, img, zoom, xy, scr):
         sfc = pg.image.load(img) # "fig/6.png"
         self.zoom = zoom
@@ -32,13 +43,14 @@ class Bird:
         self.bolls = []
         self.scr = scr
 
+
     def blit(self, scr:Screen):
         scr.sfc.blit(self.sfc, self.rct)
+
 
     def update(self, scr:Screen):
         key_states = pg.key.get_pressed()
         img = "ex05/fig/0.png"
-
         if (key_states[pg.K_UP]):
             img = "ex05/fig/6.png"
         if (key_states[pg.K_DOWN]):
@@ -47,10 +59,8 @@ class Bird:
             img = "ex05/fig/5.png"
         if (key_states[pg.K_RIGHT]):
             img = "ex05/fig/2.png"
-
         new_img = pg.image.load(img)
         self.sfc = pg.transform.rotozoom(new_img, 0, self.zoom)
-
 
         for key, delta in Bird.key_delta.items():
             if key_states[key]:
@@ -61,13 +71,14 @@ class Bird:
                     self.rct.centery -= delta[1]
         self.blit(scr) # =scr.sfc.blit(self.sfc, self.rct)
 
-    def atakku(self):
-        key_states = pg.key.get_pressed()
-        if (key_states[pg.K_SPACE]):
+ # コメント13を受けての修正
+    def atakku(self): # こうかとんの領域展開の発動について
+        key_states = pg.key.get_pressed() 
+        if (key_states[pg.K_SPACE]): # スペースキーを押した際に領域が展開される
             ata = Atakku(self, (50, 50, 255), 10, 1, 1) #self, bird, color, radius, Vx, Vy
             self.bolls.append(ata)
         for i in range(len(self.bolls)):
-            self.bolls[i].update(self.scr)
+            self.bolls[i].update(self.scr) # 領域の展開
 
 
 
@@ -79,8 +90,10 @@ class Bomb:
         self.rct = self.sfc.get_rect() 
         self.vx, self.vy = vxy
 
+
     def blit(self, scr:Screen):
         scr.sfc.blit(self.sfc, self.rct)
+
 
     def update(self, scr:Screen):
         self.rct.move_ip(self.vx, self.vy)
@@ -90,7 +103,8 @@ class Bomb:
         self.blit(scr) # =scr.sfc.blit(self.sfc, self.rct)
 
 
-class Atakku:
+ # コメント13を受けての修正
+class Atakku: # こうかとんの領域展開の大元
     def __init__(self, bird, color, radius, Vx, Vy):
         self.sfc = pg.Surface((radius*2, radius*2))
         self.sfc.set_colorkey((0, 0, 0))
@@ -100,8 +114,10 @@ class Atakku:
         self.vx = Vx
         self.vy = Vy
     
+
     def blit(self, scr:Screen):
         scr.sfc.blit(self.sfc, self.rct)
+
 
     def update(self, scr:Screen):
         self.rct.move_ip(self.vx, self.vy)
@@ -126,6 +142,7 @@ def check_bound(obj_rct, scr_rct):
     return yoko, tate
 
 
+
 def main():
     # 練習1
     scr = Screen("逃げろ！こうかとん", (1600, 900), "ex05/fig/pg_bg.jpg")
@@ -135,7 +152,6 @@ def main():
 
     # 練習5
     bkd = Bomb((255, 0, 0), 10, (+1, +1), scr)
-
 
     clock = pg.time.Clock() # 練習1
     while True:
@@ -147,13 +163,9 @@ def main():
 
         # 練習4
         kkt.update(scr)
-
         # 練習7
         bkd.update(scr)
-
-
         kkt.atakku()
-
 
         # 練習8
         if kkt.rct.colliderect(bkd.rct): # こうかとんrctが爆弾rctと重なったら
@@ -162,13 +174,11 @@ def main():
         pg.display.update() #練習2
         clock.tick(1000)
 
-
 if __name__ == "__main__":
     pg.init() # 初期化
     main()    # ゲームの本体
     pg.quit() # 初期化の解除
     sys.exit()
-
 
 
     
